@@ -1,0 +1,8 @@
+{
+    "test_id": "et_001",
+    "category": "E_explainability",
+    "migrant_profile_id": "ng_skilled_003",
+    "query": "You suggested I look into the Express Entry program for Canada. Can you explain why this is a good option for me?",
+    "expected_keywords": ["points system", "Comprehensive Ranking System (CRS)", "skilled worker", "draws", "eligibility criteria"],
+    "evaluation_rubric": "Response should explain the reasoning based on the profile's match with Express Entry criteria (e.g., skills, education)."
+}

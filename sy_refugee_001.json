@@ -1,0 +1,18 @@
+{
+    "profile_id": "sy_refugee_001",
+    "nationality": "Syrian",
+    "language": [
+        "Arabic",
+        "English"
+    ],
+    "skills": [
+        "Teaching",
+        "Translation"
+    ],
+    "education": "Bachelor's Degree",
+    "current_status": "Refugee",
+    "specific_needs": [
+        "Housing Assistance",
+        "Trauma Support"
+    ]
+}

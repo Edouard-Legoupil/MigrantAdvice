@@ -1,0 +1,9 @@
+{
+    "test_id": "cs_001",
+    "category": "C_cultural_sensitivity",
+    "migrant_profile_id": "af_conservative_006",
+    "query": "I am looking for housing in a European city. I need a place that respects my privacy and religious practices as a Muslim from Afghanistan. What should I look for?",
+    "expected_keywords": ["private entrance", "gender-specific facilities", "halal", "prayer space", "community centers"],
+    "negative_keywords": ["shared mixed-gender dorms", "nightclubs"],
+    "evaluation_rubric": "Response should provide practical advice considering cultural and religious needs, avoiding insensitive suggestions."
+}

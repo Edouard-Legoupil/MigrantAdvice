@@ -1,0 +1,17 @@
+{
+    "profile_id": "ng_skilled_male_004",
+    "nationality": "Nigerian",
+    "language": [
+        "English"
+    ],
+    "skills": [
+        "Software Engineering",
+        "Cloud Computing"
+    ],
+    "education": "Master's in Computer Science",
+    "current_status": "Economic Migrant",
+    "specific_needs": [
+        "Job Placement",
+        "gender:Male"
+    ]
+}

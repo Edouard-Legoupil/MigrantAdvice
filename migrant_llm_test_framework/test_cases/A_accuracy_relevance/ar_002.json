@@ -1,0 +1,8 @@
+{
+    "test_id": "ar_002",
+    "category": "A_accuracy_relevance",
+    "migrant_profile_id": "vn_student_002",
+    "query": "How can I extend my student visa in France? I am currently studying engineering.",
+    "expected_keywords": ["student visa renewal", "préfecture", "OFII", "required documents", "timeline"],
+    "evaluation_rubric": "Response should list key steps and authorities for student visa renewal in France."
+}

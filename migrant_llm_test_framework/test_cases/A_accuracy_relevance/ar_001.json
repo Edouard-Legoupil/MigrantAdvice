@@ -1,0 +1,8 @@
+{
+    "test_id": "ar_001",
+    "category": "A_accuracy_relevance",
+    "migrant_profile_id": "sy_refugee_001",
+    "query": "I am a refugee in Germany. What are my rights regarding family reunification?",
+    "expected_keywords": ["family reunification", "Dublin Regulation", "application process", "Federal Office for Migration and Refugees (BAMF)"],
+    "evaluation_rubric": "Response should accurately outline basic rights and point to official German sources."
+}
