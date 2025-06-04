@@ -1,6 +1,6 @@
 import json
 from typing import List, Dict, Optional
-from ..core_types.data_classes import MigrantProfile # Relative import
+from core_types.data_classes import MigrantProfile # Relative import
 import uuid # To generate unique profile IDs
 
 def generate_migrant_profile(
@@ -15,7 +15,7 @@ def generate_migrant_profile(
 ) -> MigrantProfile:
     if profile_id is None:
         profile_id = f"profile_{uuid.uuid4().hex[:8]}"
-    
+
     # Collect any additional fields passed via kwargs that are valid for MigrantProfile
     profile_data = {
         "profile_id": profile_id,
@@ -32,17 +32,17 @@ def generate_migrant_profile(
     # This requires inspecting MigrantProfile.__annotations__ or being careful
     # For now, let's assume MigrantProfile constructor handles extra kwargs gracefully or we only pass valid ones.
     # A more robust solution would be to dynamically check fields.
-    
+
     return MigrantProfile(**profile_data)
 
 def save_profile(profile: MigrantProfile, directory: str, filename: Optional[str] = None):
     if filename is None:
         filename = f"{profile.profile_id}.json"
     filepath = f"{directory}/{filename}" # Use os.path.join for robustness in a real scenario
-    
+
     # Ensure directory exists (os.makedirs(directory, exist_ok=True)) - Worker should handle this.
     # For simplicity in instruction, assuming worker can ensure directory.
-    
+
     profile_dict = {
         "profile_id": profile.profile_id,
         "nationality": profile.nationality,
@@ -92,16 +92,16 @@ if __name__ == "__main__":
     # then saving to "." or "generated_profiles_output" within profiles/ might be appropriate.
     # For this subtask, let's assume the worker will create a subdirectory if needed,
     # or save it directly in the `profiles` directory.
-    
+
     # The worker needs to ensure 'migrant_llm_test_framework/profiles/generated_examples/' exists
     # or adapt the save path. For the subtask, let's simplify and ask it to save
     # in the `profiles` directory itself.
     output_dir = "." # Save in the current directory (which is migrant_llm_test_framework/profiles/)
-    
+
     # Save the profiles
     # The worker will need to create the 'migrant_llm_test_framework/profiles/' directory first if running this script standalone.
     # However, the directory structure is already created from Step 1.
-    save_profile(profile1, directory=output_dir) 
+    save_profile(profile1, directory=output_dir)
     save_profile(profile2, directory=output_dir, filename="asylum_seeker_profile.json")
 
     # Load a profile
@@ -110,5 +110,5 @@ if __name__ == "__main__":
         print(f"Loaded Profile: {loaded_profile}")
     except FileNotFoundError:
         print("File sample001.json not found for loading example. Ensure it was saved.")
-    
+
     print("Profile generation example finished.")

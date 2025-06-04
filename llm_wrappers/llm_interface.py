@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Dict, Optional
 # Attempt relative import, adjust if necessary for worker's execution context
 try:
-    from ..core_types.data_classes import MigrantProfile
+    from core_types.data_classes import MigrantProfile
 except ImportError:
     # Fallback for potential execution context issues if run directly
     # This assumes core_types is in a location Python can find if not using relative path
@@ -57,14 +57,14 @@ class MockLLMAdviser(LLMAdviser):
         # Prioritize test_id if provided and matches
         if test_id and test_id in self.canned_responses:
             return self.canned_responses[test_id]
-        
+
         # Fallback: simple keyword matching (can be made more sophisticated)
         if "family reunification" in query.lower():
             return self.canned_responses.get("ar_001", self.canned_responses["default"])
         if "extend my student visa" in query.lower() and "france" in query.lower():
             return self.canned_responses.get("ar_002", self.canned_responses["default"])
         # Add more keyword-based rules if desired for more dynamic mocking without test_id
-        
+
         return self.canned_responses["default"]
 
 if __name__ == "__main__":
@@ -92,18 +92,18 @@ if __name__ == "__main__":
         # For the purpose of creating the file, this __main__ block is secondary.
         # A simple way to make it runnable is to ensure the 'migrant_llm_test_framework'
         # parent directory is in PYTHONPATH.
-        
+
         # Corrected instantiation for the example:
         # Define MigrantProfile locally for the example if import is tricky for __main__
         # For the actual module, the `from ..core_types.data_classes import MigrantProfile` should work
         # when the module is part of the package.
-        
+
         # To make __main__ runnable by worker for basic check:
         # Option 1: Worker ensures PYTHONPATH is set.
         # Option 2: Modify example to not depend on external import if it's just for basic validation of MockLLMAdviser.
         # Let's assume worker can handle the import for the __main__ block or will skip running it if problematic.
         # The primary goal is the class definitions.
-        
+
         # Simplified example for worker if import is an issue:
         class TempProfileForTesting: # Minimal dummy for testing if MigrantProfile import fails in __main__
             def __init__(self, **kwargs): self.__dict__.update(kwargs)
@@ -122,7 +122,7 @@ if __name__ == "__main__":
         # Test with a query that should hit default
         response3 = mock_llm.get_advice(test_profile, "What is the weather like?")
         print(f"Response for 'weather' query: {response3}")
-        
+
     except NameError as e:
         print(f"Could not run __main__ example, possibly due to MigrantProfile not being defined or importable: {e}")
     except Exception as e:

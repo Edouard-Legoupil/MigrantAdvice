@@ -2,7 +2,7 @@ import re
 from typing import List, Dict, Any
 # Attempt relative import
 try:
-    from ..core_types.data_classes import TestCase, TestResult, MigrantProfile
+    from core_types.data_classes import TestCase, TestResult, MigrantProfile
 except ImportError:
     # Fallback for potential execution context issues
     from core_types.data_classes import TestCase, TestResult, MigrantProfile
@@ -13,7 +13,7 @@ def evaluate_keyword_presence(response: str, expected_keywords: List[str], case_
     """Scores based on the proportion of expected keywords found in the response."""
     if not expected_keywords:
         return 1.0 # No keywords to check, so requirement met.
-    
+
     found_count = 0
     for keyword in expected_keywords:
         if case_sensitive:
@@ -84,7 +84,7 @@ def evaluate_explainability(test_case: TestCase, response: str) -> Dict[str, flo
     explanation_indicators = test_case.expected_keywords + ["because", "due to", "this means", "therefore", "as a result of"]
     # Remove duplicates if any by converting to set and back to list
     explanation_indicators = list(set(explanation_indicators))
-    
+
     raw_scores["explanation_indicator_score"] = evaluate_keyword_presence(response, explanation_indicators)
     return raw_scores
 
@@ -135,11 +135,11 @@ def run_evaluation(test_case: TestCase, llm_response: str) -> TestResult:
                 passed = False
         elif score_value < 0.5: # Presence scores need at least 0.5 to pass (arbitrary threshold)
             passed = False
-    
+
     # Simple average for the main 'scores' dict, could be more nuanced
     overall_score = sum(final_score_values) / len(final_score_values) if final_score_values else 0.0
     aggregated_scores["overall_assessment_score"] = overall_score
-    
+
     # If a rubric is provided, it implies manual review might be needed or it provides specific pass/fail criteria
     # For now, we just note it.
     notes = f"Evaluation based on category '{test_case.category}'. Rubric: {test_case.evaluation_rubric if test_case.evaluation_rubric else 'N/A'}"

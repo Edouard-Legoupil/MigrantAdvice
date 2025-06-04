@@ -19,13 +19,13 @@ class TestCase:
     query: str
     expected_keywords: List[str] = field(default_factory=list)
     negative_keywords: List[str] = field(default_factory=list)
-    evaluation_rubric: Optional[str] = None 
+    evaluation_rubric: Optional[str] = None
 
 @dataclass
 class TestResult:
     test_case_id: str
     llm_response: str
-    scores: Dict[str, float] 
-    pass_fail: bool 
+    scores: Dict[str, float]
+    pass_fail: bool
     raw_scores: Dict[str, float] = field(default_factory=dict)
     evaluation_notes: Optional[str] = None

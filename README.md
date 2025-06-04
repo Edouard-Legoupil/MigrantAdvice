@@ -6,24 +6,23 @@ This project provides a Python-based framework for testing Large Language Models
 
 ## 2. Current Status & Limitations (Alpha)
 
-*   **Initial Framework:** This is an early-stage framework. Core components are in place, but it's not yet feature-complete.
-*   **Mock LLM:** Currently, testing is performed against a `MockLLMAdviser` which returns predefined responses based on test case IDs or keywords. Integration with real LLMs is a future step.
-*   **Basic Evaluation:** Evaluation logic is primarily keyword-based. More nuanced semantic understanding and context-aware evaluation are planned.
-*   **Limited Test Cases:** A small, illustrative set of migrant profiles and test cases are provided. These need significant expansion for comprehensive testing.
-*   **No Orchestration Script Yet:** A master script (`run_tests.py`) to automate the execution of all tests and generate a consolidated report is planned but not yet implemented. Manual execution or custom scripting is required to run tests using the existing components.
+*   **Initial Framework:** This is an early-stage framework. Core components are in place, including a `run_tests.py` script for orchestration.
+*   **Mock LLM:** Currently, testing is performed against a `MockLLMAdviser` which returns predefined responses. Integration with real LLMs is a future step.
+*   **Basic Evaluation:** Evaluation logic is primarily keyword-based.
+*   **Limited Test Cases:** A small, illustrative set of migrant profiles and test cases are provided.
 
 ## 3. Directory Structure
 
-Here's an overview of the main directories and their purpose:
+Here's an overview of the main directories and their purpose (project root):
 
-*   `migrant_llm_test_framework/`
-    *   `core_types/`: Contains Python dataclasses for core data structures (`MigrantProfile`, `TestCase`, `TestResult`).
-    *   `profiles/`: Stores synthetic migrant profiles as JSON files. Includes `profile_generator.py` to help create these.
-    *   `test_cases/`: Stores test cases categorized by evaluation criteria (e.g., `A_accuracy_relevance/`, `B_bias_fairness/`). Test cases are in JSON format.
-    *   `llm_wrappers/`: Contains the `llm_interface.py` module, which defines the `LLMAdviser` abstract base class and the `MockLLMAdviser` implementation.
-    *   `evaluators/`: Contains `evaluator.py`, which includes logic for scoring LLM responses based on test case criteria.
-    *   `results/`: (Planned) Intended for storing test results.
-    *   `README.md`: This file.
+*   `core_types/`: Contains Python dataclasses for core data structures (`MigrantProfile`, `TestCase`, `TestResult`).
+*   `profiles/`: Stores synthetic migrant profiles as JSON files. Includes `profile_generator.py` to help create these.
+*   `test_cases/`: Stores test cases categorized by evaluation criteria (e.g., `A_accuracy_relevance/`, `B_bias_fairness/`). Test cases are in JSON format.
+*   `llm_wrappers/`: Contains the `llm_interface.py` module, which defines the `LLMAdviser` abstract base class and the `MockLLMAdviser` implementation.
+*   `evaluators/`: Contains `evaluator.py`, which includes logic for scoring LLM responses based on test case criteria.
+*   `results/`: Directory where result reports (e.g., JSON output from `run_tests.py`) are saved.
+*   `run_tests.py`: The main script for orchestrating test execution.
+*   `README.md`: This file.
 
 ## 4. Key Components
 
@@ -107,80 +106,61 @@ Here's an overview of the main directories and their purpose:
     5.  Aggregates raw scores into a summary `scores` dictionary.
     6.  Returns a `TestResult` object.
 
-## 5. How to Use (Current Workflow - Manual)
+## 5. How to Use
 
-As the main orchestration script (`run_tests.py`) is not yet implemented, using the framework involves the following manual steps:
+The primary way to run tests using this framework is via the `run_tests.py` script located in the project root directory. This script automatically discovers test cases, loads migrant profiles, interacts with the configured LLM adviser, evaluates responses, and generates reports.
 
-1.  **Define/Ensure Profiles:** Create or verify the `MigrantProfile` JSON files you need in `profiles/`.
-2.  **Define Test Cases:** Create the `TestCase` JSON files in the appropriate `test_cases/` subdirectories, linking to your profiles.
-3.  **Write a Custom Script:** You'll need to write a Python script to:
-    *   Load `MigrantProfile` objects (e.g., using `json.load` and creating `MigrantProfile` instances, or using `load_profile` from `profile_generator.py`).
-    *   Load `TestCase` objects (e.g., using `json.load` and creating `TestCase` instances).
-    *   Instantiate an LLM adviser (e.g., `MockLLMAdviser`).
-    *   For each test case:
-        *   Get the LLM's response using `llm_adviser.get_advice(profile, test_case.query, test_id=test_case.test_id)`.
-        *   Evaluate the response using `run_evaluation(test_case, llm_response)` from `evaluator.py`.
-        *   Collect and review the `TestResult` objects.
+### 5.1. Running Tests
 
-    ```python
-    # --- Example snippet for a custom script ---
-    # (Assumes this script is in the root 'migrant_llm_test_framework' directory or paths adjusted)
-    import json
-    from core_types.data_classes import MigrantProfile, TestCase
-    from llm_wrappers.llm_interface import MockLLMAdviser
-    from evaluators.evaluator import run_evaluation
-    from profiles.profile_generator import load_profile # Helper
+Navigate to the project root directory in your terminal and execute the script using Python:
 
-    # 1. Load a profile
-    # Make sure 'profiles/sy_refugee_001.json' exists
-    try:
-        profile = load_profile("profiles/sy_refugee_001.json")
-    except FileNotFoundError:
-        print("Error: Sample profile 'profiles/sy_refugee_001.json' not found.")
-        # exit() # Avoid exit() in non-interactive context if possible
-    except json.JSONDecodeError:
-        print("Error: Could not decode 'profiles/sy_refugee_001.json'. Ensure it's valid JSON.")
-        # exit()
+```bash
+python run_tests.py [OPTIONS]
+```
 
-    # 2. Load a test case
-    # Make sure 'test_cases/A_accuracy_relevance/ar_001.json' exists
-    try:
-        with open("test_cases/A_accuracy_relevance/ar_001.json", 'r') as f:
-            tc_data = json.load(f)
-        test_case = TestCase(**tc_data)
-    except FileNotFoundError:
-        print("Error: Sample test case 'test_cases/A_accuracy_relevance/ar_001.json' not found.")
-        # exit()
-    except json.JSONDecodeError:
-        print("Error: Could not decode 'test_cases/A_accuracy_relevance/ar_001.json'. Ensure it's valid JSON.")
-        # exit()
+### 5.2. Command-Line Options
 
-    # 3. Instantiate LLM Adviser
-    llm = MockLLMAdviser()
+The behavior of `run_tests.py` can be customized with the following command-line arguments:
 
-    # 4. Get advice and evaluate
-    # Ensure profile and test_case were loaded successfully before proceeding
-    if 'profile' in locals() and 'test_case' in locals() and profile.profile_id == test_case.migrant_profile_id:
-        response = llm.get_advice(profile, test_case.query, test_id=test_case.test_id)
-        result = run_evaluation(test_case, response)
+*   `--test_cases_dir DIRECTORY`: Path to the directory containing test case category subdirectories.
+    *   Default: `./test_cases`
+*   `--profiles_dir DIRECTORY`: Path to the directory containing migrant profile JSON files.
+    *   Default: `./profiles`
+*   `--results_dir DIRECTORY`: Directory where result reports (e.g., JSON output) will be saved.
+    *   Default: `./results`
+*   `--categories CATEGORY [CATEGORY ...]`: Run only tests from the specified categories (e.g., `A_accuracy_relevance` `C_cultural_sensitivity`). If not provided, tests from all categories will be run.
+    *   Example: `python run_tests.py --categories A_accuracy_relevance D_legal_ethical`
+*   `--llm_type TYPE`: Specifies which LLM adviser to use.
+    *   Default: `mock`
+    *   Currently available: `mock` (Support for other LLMs is planned).
+*   `--output_filename FILENAME`: Filename for the JSON report saved in the `results_dir`.
+    *   Default: `test_results.json`
+*   `-v`, `--verbose`: Enable verbose logging, which sets the logging level to DEBUG. Useful for troubleshooting.
 
-        print(f"--- Test Result for {result.test_case_id} ---")
-        print(f"Query: {test_case.query}")
-        print(f"LLM Response: {result.llm_response}")
-        print(f"Pass/Fail: {'PASS' if result.pass_fail else 'FAIL'}")
-        print(f"Aggregated Score: {result.scores.get('overall_assessment_score', 'N/A')}")
-        print(f"Raw Scores: {result.raw_scores}")
-        print(f"Evaluation Notes: {result.evaluation_notes}")
-    elif not ('profile' in locals() and 'test_case' in locals()):
-        print("Skipping advice and evaluation due to earlier errors loading profile or test case.")
-    else:
-        print(f"Profile ID mismatch: {profile.profile_id} vs {test_case.migrant_profile_id}")
-    # --- End Example ---
+### 5.3. Example Executions
+
+*   **Run all tests with default settings:**
+    ```bash
+    python run_tests.py
     ```
+*   **Run tests for specific categories and save results to a custom file:**
+    ```bash
+    python run_tests.py --categories A_accuracy_relevance C_cultural_sensitivity --output_filename custom_results.json
+    ```
+*   **Run tests with verbose output:**
+    ```bash
+    python run_tests.py -v
+    ```
+
+### 5.4. Interpreting Output
+
+*   **Console Output:** The script will print live progress, including which tests are being run and their pass/fail status. A summary report will be displayed at the end, showing total tests run, pass/fail counts, a list of failed tests, and a category-wise breakdown.
+*   **JSON Report:** A JSON file (default: `results/test_results.json`) will be generated containing a list of all `TestResult` objects in dictionary format. This file provides detailed information for each test run.
+
+*(The previous sub-section detailing manual script execution can be removed or archived as `run_tests.py` is now the standard method.)*
 
 ## 6. Future Development
 
-*   **`run_tests.py` Orchestration Script:** A top-level script to automatically discover and run all test cases, collect results, and generate a comprehensive report.
 *   **Real LLM Integration:** Implement wrappers for actual LLM APIs (e.g., OpenAI GPT, Anthropic Claude, open-source models).
 *   **Advanced Evaluation Metrics:**
     *   Semantic similarity scoring.
