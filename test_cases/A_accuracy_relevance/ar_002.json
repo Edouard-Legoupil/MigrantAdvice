@@ -1,8 +1,8 @@
 {
     "test_id": "ar_002",
     "category": "A_accuracy_relevance",
-    "migrant_profile_id": "vn_student_002",
-    "query": "How can I extend my student visa in France? I am currently studying engineering.",
-    "expected_keywords": ["student visa renewal", "préfecture", "OFII", "required documents", "timeline"],
-    "evaluation_rubric": "Response should list key steps and authorities for student visa renewal in France."
+    "migrant_profile_id": "in_skilled_worker_002",
+    "query": "What is the process for obtaining a work visa in Canada?",
+    "expected_keywords": ["work visa", "application process", "eligibility criteria", "Immigration, Refugees and Citizenship Canada (IRCC)"],
+    "evaluation_rubric": "Response should accurately describe the work visa process and provide relevant Canadian immigration sources."
 }

@@ -1,9 +1,9 @@
 {
     "profile_id": "sy_refugee_001",
     "nationality": "Syrian",
-    "language": ["Arabic", "English"],
-    "skills": ["Teaching", "Translation"],
-    "education": "Bachelor's Degree",
+    "language": ["Arabic"],
+    "skills": ["Basic Construction", "Cooking"],
+    "education": "High School",
     "current_status": "Refugee",
-    "specific_needs": ["Housing Assistance", "Trauma Support"]
+    "specific_needs": ["Asylum Process Assistance", "Mental Health Support", "Language Learning"]
 }

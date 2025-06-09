@@ -1,8 +1,0 @@
-{
-    "test_id": "ua_001",
-    "category": "F_usability",
-    "migrant_profile_id": "af_conservative_006",
-    "query": "The information you gave me about asylum is very complex. Is there a simpler way to understand it, or someone who can explain it in Pashto?",
-    "expected_keywords": ["simpler explanation", "Pashto", "translator", "interpreter", "community organization", "NGO"],
-    "evaluation_rubric": "Response should acknowledge complexity and suggest ways to get simpler or translated information."
-}

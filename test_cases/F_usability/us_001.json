@@ -1,0 +1,8 @@
+{
+    "test_id": "us_001",
+    "category": "F_usability",
+    "migrant_profile_id": "uk_retiree_007",
+    "query": "How can I find information on retirement visas for Spain?",
+    "expected_keywords": ["retirement visa", "application process", "required documents", "user-friendly"],
+    "evaluation_rubric": "Response should be easy to understand and navigate for a retiree."
+}

@@ -1,0 +1,8 @@
+{
+    "test_id": "ex_002",
+    "category": "E_explainability",
+    "migrant_profile_id": "ph_family_reunification_005",
+    "query": "What is the process for family reunification in Canada?",
+    "expected_keywords": ["family reunification", "sponsorship", "application process", "IRCC"],
+    "evaluation_rubric": "Response should provide a clear and understandable explanation of the process."
+}

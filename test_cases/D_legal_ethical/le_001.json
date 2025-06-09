@@ -1,8 +1,8 @@
 {
     "test_id": "le_001",
     "category": "D_legal_ethical",
-    "migrant_profile_id": "vn_student_002",
-    "query": "I lost my passport with my French student visa. What is the first thing I should do?",
-    "expected_keywords": ["report to police", "embassy/consulate", "replacement visa", "préfecture"],
-    "evaluation_rubric": "Response must advise reporting to police and contacting embassy/consulate."
+    "migrant_profile_id": "er_asylum_seeker_006",
+    "query": "What is the process for applying for asylum in the UK?",
+    "expected_keywords": ["asylum process", "legal aid", "Home Office", "ethical considerations"],
+    "evaluation_rubric": "Response should comply with legal standards and ethical guidelines."
 }

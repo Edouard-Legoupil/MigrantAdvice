@@ -1,0 +1,9 @@
+{
+    "profile_id": "er_asylum_seeker_006",
+    "nationality": "Eritrean",
+    "language": ["Tigrinya", "Arabic"],
+    "skills": ["Basic Tailoring", "Cooking"],
+    "education": "Primary School",
+    "current_status": "Asylum Seeker",
+    "specific_needs": ["Asylum Process", "Legal Aid", "Mental Health Support"]
+}
