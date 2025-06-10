@@ -39,8 +39,9 @@ def parse_arguments() -> argparse.Namespace:
         help="Optional list of categories to run (e.g., A_accuracy_relevance B_bias_fairness). Runs all if not specified."
     )
     parser.add_argument(
-        "--llm_type", type=str, default="mock", choices=["mock"], # Add more choices as they are implemented
-        help="Specify which LLM to use (currently only 'mock' is available)."
+        "--llm_type", type=str, default="mock",
+            choices=["mock", "azure_openai"], # MODIFIED: Added "azure_openai"
+            help="Specify which LLM to use."
     )
     parser.add_argument(
         "--output_filename", type=str, default="test_results.json",
@@ -190,12 +191,24 @@ def load_migrant_profile(profile_id: str, profiles_dir: pathlib.Path) -> Optiona
 
 def initialize_llm_adviser(llm_type: str = "mock") -> Optional[LLMAdviser]:
     """Initializes and returns an LLM adviser instance."""
-    if llm_type.lower() == "mock":
+    llm_type_lower = llm_type.lower()
+    if llm_type_lower == "mock":
         logging.info("Initializing MockLLMAdviser.")
-        if 'MockLLMAdviser' not in globals():
+        try:
+            # MockLLMAdviser is already imported at the top, but good practice for conditional import:
+            from llm_wrappers.llm_interface import MockLLMAdviser
+        except ImportError:
             logging.error("MockLLMAdviser not available due to import issues.")
             return None
         return MockLLMAdviser()
+    elif llm_type_lower == "azure_openai": # NEW BLOCK
+        logging.info("Initializing AzureOpenAILLMAdviser.")
+        try:
+            from llm_wrappers.azure_openai_llm import AzureOpenAILLMAdviser
+        except ImportError:
+            logging.error("AzureOpenAILLMAdviser not available. Ensure 'llm_wrappers/azure_openai_llm.py' exists and is importable.")
+            return None
+        return AzureOpenAILLMAdviser()
     else:
         logging.error(f"Unsupported LLM type: {llm_type}")
         return None

@@ -132,7 +132,7 @@ The behavior of `run_tests.py` can be customized with the following command-line
     *   Example: `python run_tests.py --categories A_accuracy_relevance D_legal_ethical`
 *   `--llm_type TYPE`: Specifies which LLM adviser to use.
     *   Default: `mock`
-    *   Currently available: `mock` (Support for other LLMs is planned).
+    *   Currently available: `mock`, `azure_openai` (requires environment variables for configuration - see below).
 *   `--output_filename FILENAME`: Filename for the JSON report saved in the `results_dir`.
     *   Default: `test_results.json`
 *   `-v`, `--verbose`: Enable verbose logging, which sets the logging level to DEBUG. Useful for troubleshooting.
@@ -159,9 +159,28 @@ The behavior of `run_tests.py` can be customized with the following command-line
 
 *(The previous sub-section detailing manual script execution can be removed or archived as `run_tests.py` is now the standard method.)*
 
+### 5.5. Using with Azure OpenAI Service
+
+To use your own Azure OpenAI Service models, you can specify `--llm_type azure_openai`. This requires the following environment variables to be set:
+
+*   `AZURE_OPENAI_ENDPOINT`: Your Azure OpenAI resource endpoint (e.g., `https://your-resource-name.openai.azure.com/`).
+*   `AZURE_OPENAI_API_KEY`: Your Azure OpenAI API key.
+*   `AZURE_OPENAI_DEPLOYMENT_NAME`: The name of your specific model deployment on Azure (e.g., `gpt-35-turbo`, `gpt-4-deployment`).
+*   `AZURE_OPENAI_API_VERSION`: The API version your Azure OpenAI resource uses (e.g., `2023-07-01-preview`).
+
+**Example command:**
+```bash
+export AZURE_OPENAI_ENDPOINT="your_endpoint_here"
+export AZURE_OPENAI_API_KEY="your_api_key_here"
+export AZURE_OPENAI_DEPLOYMENT_NAME="your_deployment_name_here"
+export AZURE_OPENAI_API_VERSION="your_api_version_here"
+python run_tests.py --llm_type azure_openai --categories A_accuracy_relevance
+```
+**Note:** Ensure the `openai` Python library is installed in your environment (`pip install openai`).
+
 ## 6. Future Development
 
-*   **Real LLM Integration:** Implement wrappers for actual LLM APIs (e.g., OpenAI GPT, Anthropic Claude, open-source models).
+*   **Expand Real LLM Integration:** Further integration with various LLM APIs (e.g., direct OpenAI API, other cloud provider LLMs, locally hosted models via Ollama). Azure OpenAI Service integration is the first step.
 *   **Advanced Evaluation Metrics:**
     *   Semantic similarity scoring.
     *   Fact-checking against a knowledge base.
