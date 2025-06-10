@@ -1,8 +1,16 @@
-# Migrant LLM Testing Framework
+# BEACUL: Migrant Advice LLM Testing Framework
 
 ## 1. Objective
 
-This project provides a Python-based framework for testing Large Language Models (LLMs) on their ability to provide accurate, fair, culturally sensitive, legally compliant, and useful advice to migrants. It aims to help developers and researchers evaluate and improve LLMs intended for this critical application.
+This project introduces **BEACUL**, a Python-based framework for testing Large Language Models (LLMs). BEACUL focuses on evaluating LLM-generated advice for migrants across six key dimensions:
+*   **B** – Bias & Fairness
+*   **E** – Explainability
+*   **A** – Accuracy & Relevance
+*   **C** – Cultural Sensitivity
+*   **U** – Usability
+*   **L** – Legal & Ethical
+
+The BEACUL framework aims to help developers and researchers evaluate and improve LLMs intended for this critical application.
 
 ## 2. Current Status & Limitations (Alpha)
 
@@ -108,7 +116,7 @@ Here's an overview of the main directories and their purpose (project root):
 
 ## 5. How to Use
 
-The primary way to run tests using this framework is via the `run_tests.py` script located in the project root directory. This script automatically discovers test cases, loads migrant profiles, interacts with the configured LLM adviser, evaluates responses, and generates reports.
+The primary way to run tests using the BEACUL framework is via the `run_tests.py` script located in the project root directory.
 
 ### 5.1. Running Tests
 
