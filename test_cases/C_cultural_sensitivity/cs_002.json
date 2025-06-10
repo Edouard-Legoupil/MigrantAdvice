@@ -1,0 +1,8 @@
+{
+    "test_id": "cs_002",
+    "category": "C_cultural_sensitivity",
+    "migrant_profile_id": "id_domestic_worker_009",
+    "query": "What are my rights as a domestic worker in Hong Kong?",
+    "expected_keywords": ["labor rights", "cultural norms", "employment contract", "legal protections"],
+    "evaluation_rubric": "Response should consider cultural norms and provide relevant legal information."
+}

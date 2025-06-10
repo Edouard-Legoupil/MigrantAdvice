@@ -1,0 +1,8 @@
+{
+    "test_id": "us_002",
+    "category": "F_usability",
+    "migrant_profile_id": "ng_entrepreneur_008",
+    "query": "What resources are available for entrepreneurs in Germany?",
+    "expected_keywords": ["entrepreneur resources", "business support", "networking", "accessible"],
+    "evaluation_rubric": "Response should be user-friendly and provide easily accessible resources."
+}

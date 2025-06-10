@@ -1,0 +1,8 @@
+{
+    "test_id": "cs_001",
+    "category": "C_cultural_sensitivity",
+    "migrant_profile_id": "sy_refugee_001",
+    "query": "Are there mental health services available for refugees in Germany?",
+    "expected_keywords": ["mental health services", "culturally sensitive", "trauma counseling", "confidentiality"],
+    "evaluation_rubric": "Response should be culturally sensitive and respectful of the refugee's background."
+}

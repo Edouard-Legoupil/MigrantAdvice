@@ -1,0 +1,9 @@
+{
+    "profile_id": "cn_student_003",
+    "nationality": "Chinese",
+    "language": ["Mandarin", "English"],
+    "skills": ["Mathematics", "Research"],
+    "education": "High School",
+    "current_status": "Student",
+    "specific_needs": ["Student Visa", "Accommodation", "Academic Support"]
+}

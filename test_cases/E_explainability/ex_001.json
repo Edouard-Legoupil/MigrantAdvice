@@ -1,0 +1,8 @@
+{
+    "test_id": "ex_001",
+    "category": "E_explainability",
+    "migrant_profile_id": "cn_student_003",
+    "query": "How do I apply for a student visa in Australia?",
+    "expected_keywords": ["student visa", "application steps", "required documents", "Department of Home Affairs"],
+    "evaluation_rubric": "Response should clearly explain the application process and reasons behind each step."
+}

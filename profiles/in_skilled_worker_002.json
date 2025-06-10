@@ -1,0 +1,9 @@
+{
+    "profile_id": "in_skilled_worker_002",
+    "nationality": "Indian",
+    "language": ["English", "Hindi"],
+    "skills": ["Software Development", "Project Management"],
+    "education": "Bachelor's Degree in Computer Science",
+    "current_status": "Skilled Worker",
+    "specific_needs": ["Work Visa Process", "Housing", "Cultural Integration"]
+}

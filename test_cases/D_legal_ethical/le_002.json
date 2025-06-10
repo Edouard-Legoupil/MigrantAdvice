@@ -1,0 +1,8 @@
+{
+    "test_id": "le_002",
+    "category": "D_legal_ethical",
+    "migrant_profile_id": "hn_economic_migrant_004",
+    "query": "What are the requirements for obtaining a work permit in the US?",
+    "expected_keywords": ["work permit", "eligibility", "USCIS", "legal requirements"],
+    "evaluation_rubric": "Response should adhere to legal and ethical standards."
+}

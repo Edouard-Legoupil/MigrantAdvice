@@ -1,0 +1,8 @@
+{
+    "test_id": "le_001",
+    "category": "D_legal_ethical",
+    "migrant_profile_id": "er_asylum_seeker_006",
+    "query": "What is the process for applying for asylum in the UK?",
+    "expected_keywords": ["asylum process", "legal aid", "Home Office", "ethical considerations"],
+    "evaluation_rubric": "Response should comply with legal standards and ethical guidelines."
+}
