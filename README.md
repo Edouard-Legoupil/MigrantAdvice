@@ -200,4 +200,34 @@ python run_tests.py --llm_type azure_openai --categories A_accuracy_relevance
 
 ## 7. Contributing
 
-(Placeholder for contribution guidelines - e.g., how to suggest new test cases, improve evaluation logic, or add LLM wrappers).
+We welcome contributions to the BEACUL Framework! Whether you're interested in fixing bugs, adding new features, expanding test cases, or improving documentation, your help is appreciated.
+
+### Ways to Contribute
+
+*   **Reporting Bugs:** If you find a bug, please ensure it hasn't already been reported by checking the issue tracker (if one is set up for the project). When reporting, include detailed steps to reproduce the bug, your environment details, and any relevant error messages or logs.
+*   **Suggesting Enhancements:** If you have an idea for a new feature or an improvement to an existing one, feel free to open an issue to discuss it. Please provide a clear description of the enhancement and its potential benefits.
+*   **Adding Test Cases or Profiles:** Expanding the range of test scenarios is highly valuable.
+    *   New profiles should follow the JSON format in the `profiles/` directory.
+    *   New test cases should also follow the JSON format and be placed in the appropriate category subdirectory within `test_cases/`. Ensure your test case `migrant_profile_id` correctly links to an existing or new profile.
+*   **Code Contributions:** If you'd like to contribute code (e.g., new LLM wrappers, improved evaluation logic, bug fixes):
+    1.  **Fork the Repository:** Create your own fork of the project.
+    2.  **Create a Branch:** Make your changes in a new Git branch with a descriptive name (e.g., `feat/add-ollama-wrapper` or `fix/readme-typo`).
+    3.  **Make Your Changes:** Implement your feature or bug fix.
+    4.  **Testing:**
+        *   If you add new functionality, consider adding a relevant test case if applicable.
+        *   Ensure all tests pass by running `python run_tests.py` from the project root.
+    5.  **Commit Your Changes:** Write clear, concise commit messages explaining the purpose of your changes.
+    6.  **Submit a Pull Request (PR):** Push your branch to your fork and open a pull request to the main project repository. Provide a clear description of the changes in your PR.
+
+### Development Setup (Brief)
+
+*   Ensure you have a compatible Python version installed.
+*   The framework relies on a few Python libraries. Key among them is `openai` if you plan to work with or test the Azure OpenAI wrapper. You can typically install dependencies using `pip`.
+*   No complex build process is currently required to run the basic framework.
+
+### Code Style (General Guidance)
+
+*   Please try to follow PEP 8 guidelines for Python code.
+*   Keep code clear, readable, and add comments where necessary to explain complex logic.
+
+We look forward to your contributions!
